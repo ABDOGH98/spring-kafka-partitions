@@ -1,5 +1,6 @@
 package com.sid.kafkafactory;
 
+import com.sid.kafkafactory.factory.JsonObject;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,10 +15,10 @@ public class KafkaFactoryApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(KafkaTemplate<String, String> template){
+    CommandLineRunner commandLineRunner(KafkaTemplate<String, Object> template){
         return args -> {
-            template.send("sii",1,"test-event","heelo abdo");
-            template.send("sii",0,"test-event","heelo ziza");
+            template.send("sii",1,"test-event",new JsonObject("ziza"));
+            template.send("sii",0,"test-event",new JsonObject("abdo"));
         };
     }
 
